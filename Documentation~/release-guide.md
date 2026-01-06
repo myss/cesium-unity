@@ -37,6 +37,8 @@ Cesium for Unity's release package is fairly large, so it can take awhile to upl
 10. Update the version numbers as appropriate in the top section. Replace the changelog section with the actual changelog entries from this release. Copy it from `CHANGES.md`.
 11. Upload the .tgz file by dragging it into the "Attach binaries" box.
 12. Click Save Draft. Be careful not to publish it yet.
+13. Visit the [releases page](https://github.com/CesiumGS/cesium-unity/releases) and you'll see the new draft release at the top. Expand the "Assets" section you should see the file you uploaded above.
+14. Take a moment to verify that the SHA256 listed for each file is identical to the SHA256 for the same file that was printed at the end of the build by the "Print SHA256 of combined package" job. If they are, this proves the release package hasn't been inadvertently modified while you had a copy of it on your local machine. If they're different, stop the release process immediately!
 
 If the uploaded package is later found to have problems during testing, this step will need to be repeated.
 

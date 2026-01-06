@@ -23,9 +23,9 @@ jobs:
       - name: Install Doxygen
         run: |
           cd ~
-          wget https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz
-          tar xzf doxygen-1.12.0.linux.bin.tar.gz
-          export PATH=$PWD/doxygen-1.12.0/bin:$PATH
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_13_2/doxygen-1.13.2.linux.bin.tar.gz
+          tar xzf doxygen-1.13.2.linux.bin.tar.gz
+          export PATH=$PWD/doxygen-1.13.2/bin:$PATH
           echo "PATH=$PATH" >> "$GITHUB_ENV"
           doxygen --version
       - name: Check out repository code
@@ -517,6 +517,10 @@ jobs:
           export NAME=$(jq -r ".name" $GITHUB_WORKSPACE/package.json)
           export VERSION=$(jq -r ".version" $GITHUB_WORKSPACE/package.json)
           tar czf $NAME-$VERSION.tgz package
+      - name: Print SHA256 of combined package
+        run: |
+          cd combine/merged
+          sha256sum *.tgz
       - name: Publish combined package
         if: ${{ success() }}
         uses: actions/upload-artifact@v4

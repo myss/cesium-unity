@@ -5,17 +5,7 @@ This is the process we follow when releasing a new version of Cesium for Unity o
 
 ## Prepare Cesium Native for Release
 
-[cesium-native](https://github.com/CesiumGS/cesium-native) is used as a git submodule of cesium-unity. So the first step in releasing Cesium for Unity is to make sure that Cesium Native is ready for release.
-
-In the cesium-native repo:
-
-1. Verify that CI is passing on all platforms. Fix it if not.
-2. Verify that `CHANGES.md` is complete and accurate.
-   - Give the header of the section containing the latest changes an appropriate version number and date.
-   - Diff main against the previous released version. This helps catch changes that are missing from the changelog, as well as changelog entries that were accidentally added to the wrong section.
-3. Set the `version` property in `package.json`.
-4. Set the `VERSION` property passed to the `project()` function in `CMakeLists.txt`.
-5. Commit these changes. You can push them directly to `main`.
+[cesium-native](https://github.com/CesiumGS/cesium-native) is used as a git submodule of cesium-unity. So the first step in releasing Cesium for Unity is to make sure that Cesium Native is ready for release. See the [Cesium Native release guide](#native-release-process) for instructions. You may want to wait to create the new Cesium Native tag until after you have tested the Cesium for Unity release.
 
 ## Prepare Cesium for Unity for Release
 
@@ -43,7 +33,7 @@ Cesium for Unity's release package is fairly large, so it can take awhile to upl
 6. Create a new release by visiting https://github.com/CesiumGS/cesium-unity/releases/new.
 7. Leave the release tag blank for now, as we haven't created it yet.
 8. Set `Release Title` to "Cesium for Unity v1.21.0", updating the version number as appropriate.
-9. Copy the "release notes" section from a previous release, which you can find by visiting https://github.com/CesiumGS/cesium-unity/releases/latest and clicking the Edit button. But be careful not to save!
+9. Copy the "release notes" section from a previous release, which you can find by visiting https://github.com/CesiumGS/cesium-unity/releases/latest and clicking the Edit button. Be careful not to change or save the previous release!
 10. Update the version numbers as appropriate in the top section. Replace the changelog section with the actual changelog entries from this release. Copy it from `CHANGES.md`.
 11. Upload the .tgz file by dragging it into the "Attach binaries" box.
 12. Click Save Draft. Be careful not to publish it yet.
@@ -76,15 +66,13 @@ If the uploaded package is later found to have problems during testing, this ste
    * Does it open without crashing?
    * Does it look correct?
    * Press Play. Does it work as expected? The billboard in each level should give you a good idea of what to expect.
-5. Test on other platforms and other versions of Unity if you can. If you can't (e.g., you don't have a Mac), post a message on Slack asking others to give it at least a quick smoke test.
+5. Test on other platforms and other versions of Unity if you can. If you can't (e.g., you don't have a Mac), post a message on Teams asking others to give it at least a quick smoke test.
 
 If all of the above goes well, you're ready to release Cesium for Unity.
 
 ## Publish the release on GitHub
 
-1. Tag the cesium-native release, and push the tag. Be sure you're tagging the exact commit that cesium-unity is using.
-   - `git tag -a v0.56.0 -m "0.56.0 release"`
-   - `git push origin v0.56.0`
+1. Tag the cesium-native release if you haven't already, and push the tag. See the [Cesium Native release guide](#native-release-process) for instructions.
 2. Tag the cesium-unity release, and push the tag. Be sure you're tagging the exact commit that you tested.
    - `git tag -a v1.21.0 -m "v1.21.0 release`
    - `git push origin v1.21.0`
@@ -94,6 +82,12 @@ If all of the above goes well, you're ready to release Cesium for Unity.
    - Select the tag you just created and pushed.
    - Double-check that the other details look good.
    - Click "Publish release".
+4. Publish the reference documentation. A CI job automatically publishes the documentation to the web site at https://cesium.com/learn/cesium-unity/ref-doc/ when it is merged into the [cesium.com](https://github.com/CesiumGS/cesium-unity/tree/cesium.com) branch. So do the following:
+   - `git checkout cesium.com`
+   - `git pull --ff-only`
+   - `git merge v1.21.0 --ff-only`
+   - `git push`
+   - `git checkout main`
 
 ## Update the Package Registry
 

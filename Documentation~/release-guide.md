@@ -21,7 +21,7 @@ In the cesium-native repo:
 
 1. Update the cesium-native submodule reference to point to the latest commit that you pushed above.
    - Enter the `native~/extern/cesium-native` directory and pull the latest changes and checkout the main branch as normal.
-   - To update the submodule reference, from the cesium-unreal root, run: `git add native~/extern/cesium-native`
+   - To update the submodule reference, from the cesium-unity root, run: `git add native~/extern/cesium-native`
 2. Verify that `CHANGES.md` is complete and accurate.
    - Give the header of the section containing the latest changes an appropriate version number and date.
    - Diff main against the previous released version. This helps catch changes that are missing from the changelog, as well as changelog entries that were accidentally added to the wrong section.
@@ -29,11 +29,11 @@ In the cesium-native repo:
    - Don't forget to add a note to the end of the version section indicating the cesium-native version number change. Use a previous version as the template for this and update the "from" and "to" version numbers accordingly.
 3. Change the version in `package.json`.
 4. Commit these changes. You can push them directly to `main`.
-5. Before continuing, verify that CI passes for all platforms and Unreal Engine versions.
+5. Before continuing, verify that CI passes for all platforms.
 
 ## Optimistically upload the release packages to the GitHub releases page
 
-Cesium for Unity release package is fairly large, so it can take awhile to upload it to the GitHub Releases page. For that reason, it is helpful to start the process now, even though we haven't tested the release yet.
+Cesium for Unity's release package is fairly large, so it can take awhile to upload it to the GitHub Releases page. For that reason, it is helpful to start the process now, even though we haven't tested the release yet.
 
 1. Go to https://github.com/CesiumGS/cesium-unity/actions.
 2. Click the most recent build of the `main` branch (it should be near the top). This should be the build for the commit you pushed in the previous section. If it's still running, wait. If it failed, you'll need to fix it.
@@ -41,14 +41,14 @@ Cesium for Unity release package is fairly large, so it can take awhile to uploa
 4. Download the artifact named "Combined Package".
 5. Extract the `com.cesium.unity-1.21.0.tgz` (or similar) from the `Combined Package.zip` file. On macOS this is a pain to do, because Finder's unzip insists on also extracting the contents of the .tgz file. The best approach is probably to use `unzip` from the command-line.
 6. Create a new release by visiting https://github.com/CesiumGS/cesium-unity/releases/new.
-7. We haven't created a tag for this release yet, so leave that blank for now.
+7. Leave the release tag blank for now, as we haven't created it yet.
 8. Set `Release Title` to "Cesium for Unity v1.21.0", updating the version number as appropriate.
 9. Copy the "release notes" section from a previous release, which you can find by visiting https://github.com/CesiumGS/cesium-unity/releases/latest and clicking the Edit button. But be careful not to save!
 10. Update the version numbers as appropriate in the top section. Replace the changelog section with the actual changelog entries from this release. Copy it from `CHANGES.md`.
 11. Upload the .tgz file by dragging it into the "Attach binaries" box.
 12. Click Save Draft. Be careful not to publish it yet.
 
-If the uploaded packages are later found to have problems during testing, this step will need to be repeated.
+If the uploaded package is later found to have problems during testing, this step will need to be repeated.
 
 ## Update the "Cesium for Unity Samples" Project
 
@@ -59,7 +59,7 @@ If the uploaded packages are later found to have problems during testing, this s
    - Log in using your own `@cesium.com` email address.
    - Click your name in the top-right corner and choose "Switch to CesiumJS". If you don't see this option, ask someone on the ion team to add you to the CesiumJS account.
    - Click "Access Tokens".
-   - Create a new token named "Cesium for Unity Samples vX.Y.Z - Delete on Febtober 32, 2026". Replace the version number and date with real values. The date should be the date of the release two months out.
+   - Create a new token named "Cesium for Unity Samples vX.Y.Z - Delete on MONTH DAY, YEAR", using real values for the version number and date. The date should be the date of the release two months out, using the month's name rather than its number.
    - Enable _only_ the `assets:read` and `geocode` scopes on the new token.
    - Set the other properties as follows (these should be the defaults):
      - `Allow URLs`: "All Urls"

@@ -1,4 +1,18 @@
-# Change Log
+# Change Log {#changes}
+
+## v1.21.0 - 2026-01-05
+
+##### Additions :tada:
+
+- Added support for refreshing Cesium ion login tokens after they expire and the refresh token is still valid.
+
+##### Fixes :wrench:
+
+- Setting CesiumGeoreference.ellipsoid at runtime will now correctly update the Georeference and associated transforms.
+- Fixed a bug that could cause `Cesium3DTileset::Update` to be called more than once per frame in the Editor.
+- Further improved stability when Unity reloads the AppDomain, such as when editing scripts or entering Play mode.
+
+In addition to the above, this release updates [cesium-native](https://github.com/CesiumGS/cesium-native) from v0.55.0 to v0.56.0. See the [changelog](https://github.com/CesiumGS/cesium-native/blob/main/CHANGES.md) for a complete list of changes in cesium-native.
 
 ## v1.20.0 - 2025-12-01
 
